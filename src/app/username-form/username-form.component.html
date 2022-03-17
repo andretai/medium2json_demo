@@ -1,0 +1,17 @@
+<form [formGroup]="userInput" style="text-align: center;">
+  <mat-form-field appearance="fill">
+    <mat-label>Username</mat-label>
+    <input 
+      matInput 
+      id="username" 
+      type="text" 
+      formControlName="username" 
+      autocomplete="off"
+    >
+    <mat-hint>https://username.medium.com/</mat-hint>
+    <mat-error *ngIf="userInput.get('username')?.errors?.['required']">Username is <strong>required</strong>.</mat-error>
+    <mat-error *ngIf="userInput.get('username')?.errors?.['minlength']">Minimum <strong>3</strong> characters required.</mat-error>
+    <mat-error *ngIf="userInput.get('username')?.errors?.['maxlength']">Maximum <strong>30</strong> characters only.</mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="onSubmit()" style="display: block; margin: auto; width: 25%; margin: 12px auto 24px auto;">Search</button>
+</form>

@@ -1,0 +1,92 @@
+<app-username-form (usernameChangeEvent)="onUsernameChange($event)"></app-username-form>
+
+<div *ngIf="loading" style="display: flex; justify-content: center; margin-top: 64px;">
+  <mat-spinner color="accent" [diameter]="64"></mat-spinner>
+</div>
+
+<div *ngIf="posts.length > 0 && !loading" style="margin: auto; text-align: center;">
+  <h3 style="margin: 12px 0px; font-weight: 500;">{{ author.title }}</h3>
+  <a 
+    mat-stroked-button 
+    href="{{ author.link }}" 
+    target="_blank"
+  >
+    Visit Author's Profile
+  </a>
+</div>
+
+<div *ngIf="posts.length == 0 && !loading" style="margin: auto; text-align: center;">
+  <h4 style="margin: 24px 0px;">Please Enter a Username and Click Search.</h4>
+</div>
+
+<div *ngIf="!loading" style="width: 100%; margin: auto;">
+  <div class="post-container" *ngFor="let post of posts">
+    <!-- CARD -->
+    <mat-card class="post">
+      <!-- CARD HEADER -->
+      <mat-card-header>
+        <a 
+          mat-card-avatar 
+          href="{{ author.link }}" 
+          target="_blank" 
+          style="background-image: url('{{author.image}}'); background-size: cover;"
+        ></a>
+        <mat-card-title 
+          class="post-title" 
+          [title]="post.title"
+        >
+          {{ post.title }}
+        </mat-card-title>
+        <mat-card-subtitle>
+          Posted on {{ post.pubDate }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <!-- CARD HEADER -->
+
+      <!-- CARD IMAGE -->
+      <img 
+        mat-card-image 
+        class="thumbnail" 
+        src="{{ post.thumbnail }}" 
+      />
+      <!-- CARD IMAGE -->
+
+      <!-- CARD CONTENT -->
+      <mat-card-content 
+        class="post-desc"
+      >
+        {{ post.description | htmlcontent: 'P' }}
+      </mat-card-content>
+      <!-- CARD CONTENT -->
+
+      <!-- CARD ACTIONS -->
+      <mat-card-actions 
+        style="padding: 12px 6px;"
+      >
+        <button 
+          mat-flat-button 
+          color="accent" 
+          type="button"
+        >
+          <a 
+            mat-button 
+            href="{{ post.link }}" 
+            target="_blank"
+          >
+            Link
+          </a>
+        </button>
+        <button 
+          mat-stroked-button 
+          color="accent" 
+          type="button" 
+          (click)="addToCollection(post, 'Added to collection.', 'Close')"
+        >
+          Add to Collection
+        </button>
+      </mat-card-actions>
+      <!-- CARD ACTIONS -->
+    </mat-card>
+    <!-- CARD -->
+  </div>
+</div>

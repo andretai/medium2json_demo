@@ -1,0 +1,29 @@
+<p *ngIf="items.length == 0 && !loading" style="text-align: center;">Your collection is empty.</p>
+
+<div *ngIf="loading" style="display: flex; justify-content: center; margin-top: 64px;">
+  <mat-spinner color="accent" [diameter]="64"></mat-spinner>
+</div>
+
+<div style="padding: 12px;">
+  <mat-card *ngFor="let item of items; let i = index" style="margin-bottom: 12px; ">
+    <mat-card-header>
+      <a 
+        mat-card-avatar 
+        href="{{ item.link }}" 
+        target="_blank" 
+        style="background-image: url('{{ item.thumbnail }}'); background-size: cover;"
+      ></a>
+      <mat-card-title [title]="item.title" class="post-title">{{ item.title }}</mat-card-title>
+      <mat-card-subtitle>by {{ item.author }}</mat-card-subtitle>
+    </mat-card-header>
+    <button mat-stroked-button color="warn" type="button" (click)="removeFromCollection(i)">
+      Remove
+    </button>
+  </mat-card>
+</div>
+
+<div *ngIf="items.length > 0" style="padding: 12px;">
+  <!-- <div>{{ previewJSONFile() }}</div> -->
+  <button mat-raised-button color="primary" type="button" (click)="exportFile()" style="margin-right: 12px;">Export</button>
+  <button mat-stroked-button color="warn" type="button" (click)="clearCollection()">Clear Collection</button>
+</div>
