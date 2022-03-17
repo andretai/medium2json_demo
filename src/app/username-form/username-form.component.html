@@ -1,4 +1,4 @@
-<form [formGroup]="userInput" style="text-align: center;">
+<form [formGroup]="userInput" (ngSubmit)="onSubmit()" style="text-align: center;">
   <mat-form-field appearance="fill">
     <mat-label>Username</mat-label>
     <input 
@@ -13,5 +13,5 @@
     <mat-error *ngIf="userInput.get('username')?.errors?.['minlength']">Minimum <strong>3</strong> characters required.</mat-error>
     <mat-error *ngIf="userInput.get('username')?.errors?.['maxlength']">Maximum <strong>30</strong> characters only.</mat-error>
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="onSubmit()" style="display: block; margin: auto; width: 25%; margin: 12px auto 24px auto;">Search</button>
+  <button mat-raised-button color="primary" type="submit" style="display: block; margin: auto; width: 25%; margin: 12px auto 24px auto;">Search</button>
 </form>

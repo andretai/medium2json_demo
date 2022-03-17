@@ -21,8 +21,11 @@ export class UsernameFormComponent implements OnInit {
   ngOnInit(): void { }
 
   onSubmit(): void {
+    console.log('triggered')
     const newUsername = this.userInput.get('username')?.value
-    if (newUsername.length >= 3 && newUsername <= 30) {
+    console.log(newUsername)
+    if (newUsername.length >= 3 && newUsername.length <= 30) {
+      console.log('emitting change event')
       this.usernameChangeEvent.emit({ newUsername: newUsername })
     }
   }
